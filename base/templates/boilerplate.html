@@ -1,0 +1,44 @@
+{% load staticfiles compress base_tags %}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<title>{% block title %}{{ title }}{% endblock %}</title>
+<link rel="shortcut icon" href="{% static 'base/img/favicon.ico' %}">
+<link rel="icon" type="image/png" href="{% static 'base/img/favicon.png' %}">
+<meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+{% static 'base/img/favicon.png' as og_image_url %}
+<meta property="og:image"
+    content="{% block og_image %}{% absolute_uri og_image_url %}{% endblock %}">
+
+{% compress css %}
+{% block extra_css %}{% endblock %}
+{% endcompress %}
+
+{% analytics ANALYTICS_ID SITE_NAME %}
+
+{% block extra_header %}
+{% endblock %}
+
+</head>
+
+<body class="body">
+
+{% block body %}{% endblock %}
+
+<script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
+{% compress js %}
+{% block extra_js %}{% endblock %}
+{% endcompress %}
+
+{% block extra_footer %}{% endblock %}
+
+</body>
+
+</html>
